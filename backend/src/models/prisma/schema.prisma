@@ -1,0 +1,14 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = "sqlserver://REX-PC\\SQLEXPRESS;database=MyWebAppDB;trustServerCertificate=true;encrypt=true;Integrated Security=true"
+}
+
+model User {
+  UserId   Int     @id(map: "PK_User") @default(autoincrement())
+  Username String? @db.NVarChar(100)
+  Password String? @db.NVarChar(100)
+}

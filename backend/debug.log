@@ -1,0 +1,8 @@
+[1226/152331.488:ERROR:persistent_memory_allocator.cc(777)] Corruption detected in shared-memory segment.
+[1226/152331.488:ERROR:settings.cc(266)] Settings version is not 1
+[1226/152331.503:ERROR:crash_report_database_win.cc(426)] unexpected header
+[1226/152554.694:ERROR:crash_report_database_win.cc(426)] unexpected header
+[1226/153628.613:ERROR:crash_report_database_win.cc(426)] unexpected header
+[1226/161846.361:ERROR:crash_report_database_win.cc(426)] unexpected header
+[1226/205148.505:ERROR:settings.cc(266)] Settings version is not 1
+[1226/205148.520:ERROR:crash_report_database_win.cc(426)] unexpected header

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "outDir": "./dist",        // Compiled files will go into this directory
+    "rootDir": "./src",        // Source files will be in the "src" folder
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],     // Include all files in the "src" folder
+  "exclude": ["node_modules"]  // Exclude "node_modules"
+}
