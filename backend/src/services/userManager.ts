@@ -35,6 +35,18 @@ export class UserManager {
   }
 
   /**
+   * Retrieves a user by their UserId from the database.
+   * 
+   * @param userId - The userId of the user to retrieve.
+   * @returns {Promise<User | null>} - The user object if found, or null if the user does not exist.
+   */
+  public async getUserById(userId: number): Promise<User | null> {
+    return await prisma.user.findUnique({
+      where: {UserId: userId}
+    });
+  };
+
+  /**
    * Authorizes a user by validating their username and password.
    * 
    * @param username - The username of the user trying to log in.
