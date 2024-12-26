@@ -10,7 +10,7 @@ export class UserManager {
    * Generates a JWT (JSON Web Token) for the user.
    * 
    * @param user - The user object that will be used to generate the token.
-   * @returns {string} - The generated JWT token.
+   * @returns {string} - The generated JWT token and will also expire for 1hr lifespan.
    */
   private generateJWT(user: User): string {
     const payload = {
