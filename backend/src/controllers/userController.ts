@@ -9,6 +9,12 @@ export class UserController extends BaseController {
     this.Login = this.Login.bind(this);
   }
 
+  /// <summary>
+  /// Registers a new user and creates an account.
+  /// </summary>
+  /// <param name="req">The request object.</param>
+  /// <param name="res">The response object.</param>
+  /// <returns> A response indicating success or failure </returns>
   public async Register(req: Request, res: Response): Promise<Response> {
     const { Username, Password } = req.body;
 
@@ -25,12 +31,18 @@ export class UserController extends BaseController {
     }
   }
 
+  /// <summary>
+  /// Authenticate user and signs the user in when successful.
+  /// </summary>
+  /// <param name="req">The request object.</param>
+  /// <param name="res">The response object.</param>
+  /// <returns> A response with a token or an error message </returns>
   public async Login(req: Request, res: Response): Promise<Response> {
     const { Username, Password } = req.body;
 
     try {
       const result = await this.userMgr.authorize(Username, Password);
-      
+
       if (result.errorCode !== ErrorCode.Success) {
         return this.sendError(res, result.message);
       }
