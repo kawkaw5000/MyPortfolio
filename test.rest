@@ -1,14 +1,14 @@
 ###
-POST http://localhost:3000/api/Account/Register
+POST http://localhost:5000/api/Account/Register
 Content-Type: application/json
 
 {
-  "Username": "testuser2342",
+  "Username": "testuser234222",
   "Password": "securepassword123"
 }
 
 ###
-POST http://localhost:3000/api/Account/Login
+POST http://localhost:5000/api/Account/Login
 Content-Type: application/json
 
 {
