@@ -1,9 +1,8 @@
 import { ErrorCode, Constant } from '../utils/constants';
-import { PrismaClient, User } from '@prisma/client';
+import prisma from '../config/dbConfig';
+import { User } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-
-const prisma = new PrismaClient();
 
 export class UserManager {
   private generateJWT(user: User): string {
