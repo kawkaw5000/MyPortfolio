@@ -11,6 +11,7 @@ export class UserController extends BaseController {
     super();
     this.Register = this.Register.bind(this);
     this.Login = this.Login.bind(this);
+    this.Update = this.Update.bind(this);
   }
 
   /**
@@ -30,7 +31,23 @@ export class UserController extends BaseController {
         return this.sendError(res, newUser.message);
       }
 
-      return this.sendSuccess(res, { message: 'User created successfully', user: newUser });
+      return this.sendSuccess(res, { user: newUser });
+
+    } catch (error) {
+      return this.sendError(res, 'An error occurred during sign-up');
+    }
+  }
+
+  public async Update(req: Request, res: Response): Promise<Response> {
+    const { Username, Password, UserId } = req.body;
+    try {
+      const updateUser = await this.userMgr.editAccount(UserId, Username, Password);
+
+      if (updateUser.errorCode !== ErrorCode.Success) {
+        return this.sendError(res, updateUser.message);
+      }
+
+      return this.sendSuccess(res, { user: updateUser });
     } catch (error) {
       return this.sendError(res, 'An error occurred during sign-up');
     }

@@ -10,4 +10,7 @@ router.post('/Account/Register', asyncHandler(userController.Register));
 /// POST /Account/Login -> Handles user login
 router.post('/Account/Login', asyncHandler(userController.Login));
 
+/// POST /Account/Update -> Handles user update
+router.post('/Account/Update', asyncHandler(userController.Update));
+
 export default router;

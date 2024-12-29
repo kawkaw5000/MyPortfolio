@@ -62,13 +62,13 @@ export class UserManager {
       const user = await this.getUserByUsername(username);
 
       if (!user) {
-        errMsg = 'User does not exist.';
+        errMsg = 'User does not exist or Incorrect password.';
         return { errorCode: ErrorCode.Error, message: errMsg };
       }
 
       const isPasswordValid = await bcrypt.compare(password, user.Password);
       if (!isPasswordValid) {
-        errMsg = 'Incorrect password.';
+        errMsg = 'User does not exist or Incorrect password.';
         return { errorCode: ErrorCode.Error, message: errMsg };
       }
 
@@ -101,16 +101,74 @@ export class UserManager {
       return { errorCode: ErrorCode.Error, message: errMsg};
     }
 
-    const hashedPass = await bcrypt.hash(password, 10);
+    try {
+      const hashedPass = await bcrypt.hash(password, 10);
+    
+      await prisma.user.create({
+        data: {
+          Username: username,
+          Password: hashedPass
+        }
+      });
 
-    await prisma.user.create({
-      data: {
-        Username: username,
-        Password: hashedPass
-      }
-    });
+      errMsg = 'User created successfully.';
+      return { errorCode: ErrorCode.Success, message: errMsg };
 
-    errMsg = 'User created successfully.';
-    return { errorCode: ErrorCode.Success, message: errMsg };
+    } catch (error) {
+      console.error("Error updating user:", error);
+      errMsg = "Error updating user.";
+      return { errorCode: ErrorCode.Error, message: errMsg };
+    }
   }
+
+  /**
+   * Update the User info for changing its username and password
+   * 
+   * @param userId 
+   * @param username 
+   * @param password 
+   * @returns {Promise<{ errorCode: ErrorCode; message: string }>} - An object containing the result of the account update process:
+   * - errorCode: Success or Error code.
+   * - message: A message providing information about the result.
+   */
+  public async editAccount(userId: number, username: string, password: string): Promise<{ errorCode: ErrorCode; message: string }> {
+    let errMsg: string = '';
+  
+    const existingUser = await this.getUserById(userId);
+    const existingUsername = await this.getUserByUsername(username);
+
+    if (!existingUser) {
+      errMsg = "Error: User not found.";
+      return { errorCode: ErrorCode.Error, message: errMsg };
+    }
+
+    if (existingUsername) {
+      errMsg = "Username is already exist.";
+      return { errorCode: ErrorCode.Error, message: errMsg };
+    }
+ 
+    const hashedPass = await bcrypt.hash(password, 10);
+  
+    try {
+      await prisma.user.update({
+        where: {
+          UserId: existingUser.UserId,
+        },
+        data: {
+          Username: username,
+          Password: hashedPass,
+        },
+      });
+
+      errMsg = "User updated successfully.";
+      return { errorCode: ErrorCode.Success, message: errMsg };
+
+    } catch (error) {
+
+      console.error("Error updating user:", error);
+      errMsg = "Error updating user.";
+      return { errorCode: ErrorCode.Error, message: errMsg };
+    }
+  }
+  
 }

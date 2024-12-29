@@ -3,7 +3,7 @@ POST http://localhost:5000/api/Account/Register
 Content-Type: application/json
 
 {
-  "Username": "testuser234222",
+  "Username": "testusawder23a42a2a12a21",
   "Password": "securepassword123"
 }
 
@@ -12,6 +12,16 @@ POST http://localhost:5000/api/Account/Login
 Content-Type: application/json
 
 {
-  "Username": "testuser234222",
-  "Password": "securepassword123"
+  "Username": "kawkaw1",
+  "Password": "securepassword12233233"
+}
+
+###
+POST http://localhost:5000/api/Account/Update
+Content-Type: application/json
+
+{
+  "UserId": 14,
+  "Username": "kawkaw12345",
+  "Password": "securepassword12233233"
 }
